@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Mot du soir de Lili — Les Cœurs Solitaires</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bai+Jamjuree:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --violet: #9B59B6;
+    --violet-dark: #7D3F99;
+    --fuchsia: #E91E8C;
+    --turquoise: #00BCD4;
+    --blanc: #FAFAFA;
+    --noir: #1A1A1A;
+    --violet-light: rgba(155,89,182,0.08);
+    --violet-mid: rgba(155,89,182,0.18);
+  }
+
+  body {
+    font-family: 'Bai Jamjuree', sans-serif;
+    background: var(--blanc);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 65% 45% at 85% 5%, rgba(233,30,140,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 55% at 5% 95%, rgba(155,89,182,0.09) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(0,188,212,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .wrapper { max-width: 520px; width: 100%; }
+
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--fuchsia);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.9rem, 6.5vw, 2.6rem);
+    font-weight: 300;
+    color: var(--violet-dark);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 em { font-style: italic; color: var(--fuchsia); }
+
+  .subtitle {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: #7A6A8A;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .form-card {
+    background: white;
+    border: 1px solid var(--violet-mid);
+    padding: 2rem 1.8rem;
+    box-shadow: 0 8px 40px rgba(155,89,182,0.08);
+    margin-bottom: 1.2rem;
+    position: relative;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--violet), var(--fuchsia), var(--turquoise));
+  }
+
+  .form-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    font-weight: 300;
+    color: #5A4A6A;
+    line-height: 1.65;
+    margin-bottom: 1.6rem;
+  }
+
+  .field-group { margin-bottom: 1.1rem; }
+
+  .field-label {
+    display: block;
+    font-size: 0.67rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--violet-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .field-input {
+    width: 100%;
+    background: #F7F4FA;
+    border: 1px solid var(--violet-mid);
+    padding: 0.75rem 1rem;
+    font-family: 'Bai Jamjuree', sans-serif;
+    font-size: 0.9rem;
+    color: var(--noir);
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    appearance: none;
+  }
+
+  .field-input:focus { border-color: var(--fuchsia); }
+  .field-input::placeholder { color: #B0A0C0; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .emotions-label {
+    font-size: 0.67rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--violet-dark);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .emotions-sub {
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: #8A7A9A;
+    margin-bottom: 0.9rem;
+    display: block;
+  }
+
+  .emotions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .emotion-btn {
+    background: #F7F4FA;
+    border: 1px solid var(--violet-mid);
+    padding: 0.8rem 0.4rem 0.65rem;
+    font-family: 'Bai Jamjuree', sans-serif;
+    font-size: 0.7rem;
+    color: #5A4A6A;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    line-height: 1.25;
+  }
+
+  .emotion-btn svg { transition: transform 0.22s ease; flex-shrink: 0; }
+  .emotion-btn:hover { background: var(--violet-light); border-color: var(--violet); color: var(--violet-dark); }
+  .emotion-btn:hover svg { transform: scale(1.1); }
+
+  .emotion-btn.selected {
+    background: linear-gradient(135deg, var(--violet), var(--fuchsia));
+    border-color: transparent;
+    color: white;
+  }
+
+  .btn-generer {
+    width: 100%;
+    background: linear-gradient(135deg, var(--violet), var(--fuchsia));
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-family: 'Bai Jamjuree', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .btn-generer:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(233,30,140,0.35); }
+  .btn-generer:active { transform: translateY(0); }
+  .btn-generer:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .carte-result { display: none; animation: fadeUp 0.6s ease both; }
+  .carte-result.visible { display: block; }
+
+  .carte {
+    background: white;
+    border: 1px solid var(--violet-mid);
+    box-shadow: 0 12px 50px rgba(155,89,182,0.13);
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .carte-header {
+    background: linear-gradient(135deg, var(--violet) 0%, var(--fuchsia) 100%);
+    padding: 1.5rem 1.8rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .carte-header::before {
+    content: '';
+    position: absolute;
+    right: -1rem; top: -1rem;
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .carte-prenom {
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 0.3rem;
+    position: relative;
+  }
+
+  .carte-salut {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.25;
+    position: relative;
+  }
+
+  .carte-body { padding: 1.8rem; }
+
+  .carte-message {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.12rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--noir);
+    line-height: 1.75;
+    margin-bottom: 1.3rem;
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .carte-message::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.3rem; bottom: 0.3rem;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--turquoise), var(--violet));
+  }
+
+  .carte-conseil {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: #3A2A4A;
+    line-height: 1.68;
+    margin-bottom: 1.3rem;
+    padding: 1rem 1.1rem;
+    background: var(--violet-light);
+    border-left: 2px solid var(--turquoise);
+  }
+
+  .carte-signature {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--violet-mid);
+    padding-top: 1rem;
+  }
+
+  .signature-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--violet-dark);
+  }
+
+  .signature-brand {
+    font-size: 0.63rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .result-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .btn-action {
+    background: transparent;
+    border: 1px solid var(--violet-mid);
+    padding: 0.75rem 0.8rem;
+    font-family: 'Bai Jamjuree', sans-serif;
+    font-size: 0.71rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--violet-dark);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  .btn-action:hover { background: var(--violet); color: white; border-color: var(--violet); }
+
+  .btn-nouvelle {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(233,30,140,0.25);
+    padding: 0.75rem;
+    font-family: 'Bai Jamjuree', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fuchsia);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 1.2rem;
+  }
+
+  .btn-nouvelle:hover { background: rgba(233,30,140,0.07); }
+
+  .cta-event {
+    background: linear-gradient(135deg, #F5F0FA, #EDE6F5);
+    border: 1px solid rgba(155,89,182,0.2);
+    padding: 1.3rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .cta-event:hover {
+    background: linear-gradient(135deg, #EDE6F5, #E6DCEF);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 18px rgba(155,89,182,0.15);
+  }
+
+  .cta-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .cta-text { flex: 1; }
+
+  .cta-label {
+    font-size: 0.63rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    margin-bottom: 0.25rem;
+  }
+
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--violet-dark);
+    font-style: italic;
+    line-height: 1.35;
+  }
+
+  .cta-slogan {
+    font-size: 0.71rem;
+    color: var(--fuchsia);
+    margin-top: 0.3rem;
+    font-weight: 300;
+  }
+
+  .cta-arrow { color: var(--violet); font-size: 1.2rem; flex-shrink: 0; }
+
+  .loading { display: flex; align-items: center; justify-content: center; gap: 0.4rem; }
+
+  .dot {
+    width: 6px; height: 6px;
+    background: white;
+    border-radius: 50%;
+    animation: pulse 1.2s ease infinite;
+  }
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes pulse {
+    0%, 80%, 100% { transform: scale(0.55); opacity: 0.35; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--violet-dark);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  footer {
+    text-align: center;
+    margin-top: 1.8rem;
+    font-size: 0.69rem;
+    color: #9A8AAA;
+    letter-spacing: 0.1em;
+    font-weight: 300;
+  }
+  footer .accent { color: var(--fuchsia); }
+  footer .accent2 { color: var(--turquoise); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 380px) {
+    .field-row { grid-template-columns: 1fr; }
+    .emotions-grid { grid-template-columns: repeat(2, 1fr); }
+    .result-actions { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="brand">Lili Karantez · Les Cœurs Solitaires</div>
+    <h1>Le Mot du soir <em>de Lili</em></h1>
+    <p class="subtitle">Un message pensé rien que pour vous</p>
+  </header>
+
+  <div class="form-card" id="formCard">
+    <p class="form-intro">
+      Dites-moi où vous en êtes ce soir, et je vous offre un mot qui vous ressemble — quelque chose de vrai, de doux, et d'utile.
+    </p>
+
+    <div class="field-row">
+      <div class="field-group">
+        <label class="field-label">Votre prénom</label>
+        <input type="text" class="field-input" id="prenom" placeholder="Marie…">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Votre ville</label>
+        <input type="text" class="field-input" id="ville" placeholder="Lorient…">
+      </div>
+    </div>
+
+    <div class="field-group">
+      <span class="emotions-label">Ce soir, vous vous sentez…</span>
+      <span class="emotions-sub">Choisissez l'émotion la plus proche de votre cœur</span>
+      <div class="emotions-grid">
+
+        <!-- Lune étoile filante — Solitaire -->
+        <button class="emotion-btn" onclick="selectionner(this,'solitaire')">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+            <path d="M23 9C17.477 9 13 13.477 13 19s4.477 10 10 10c1.08 0 2.12-.17 3.1-.48C22.96 30.16 19.6 31 16 31 9.373 31 4 25.627 4 19S9.373 7 16 7c2.55 0 4.92.76 6.9 2.07A9.95 9.95 0 0023 9z" stroke="#9B59B6" stroke-width="1.5" fill="rgba(155,89,182,0.12)"/>
+            <circle cx="28" cy="10" r="1.3" fill="#E91E8C"/>
+            <circle cx="31" cy="15" r="0.85" fill="#00BCD4"/>
+            <line x1="26" y1="7" x2="29.5" y2="3.5" stroke="#E91E8C" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          Solitaire
+        </button>
+
+        <!-- Enveloppe cœur — Nostalgique -->
+        <button class="emotion-btn" onclick="selectionner(this,'nostalgique')">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+            <rect x="5" y="11" width="28" height="18" rx="1.5" stroke="#9B59B6" stroke-width="1.5" fill="rgba(155,89,182,0.08)"/>
+            <path d="M5 12l14 11L33 12" stroke="#9B59B6" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M19 21.5c0 0-5-3.2-5-6a3 3 0 016 0 3 3 0 016 0c0 2.8-7 6-7 6z" fill="rgba(233,30,140,0.22)" stroke="#E91E8C" stroke-width="1.3"/>
+          </svg>
+          Nostalgique
+        </button>
+
+        <!-- Rose qui s'ouvre — Curieux·se -->
+        <button class="emotion-btn" onclick="selectionner(this,'curieux')">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+            <line x1="19" y1="32" x2="19" y2="20" stroke="#9B59B6" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="19" y1="27" x2="15" y2="30" stroke="#9B59B6" stroke-width="1.2" stroke-linecap="round"/>
+            <ellipse cx="19" cy="15" rx="5.5" ry="7.5" stroke="#E91E8C" stroke-width="1.4" fill="rgba(233,30,140,0.10)" transform="rotate(-8 19 15)"/>
+            <ellipse cx="22.5" cy="13" rx="3.5" ry="5.5" stroke="#9B59B6" stroke-width="1.1" fill="rgba(155,89,182,0.07)" transform="rotate(14 22.5 13)"/>
+            <circle cx="19" cy="8" r="1.1" fill="#E91E8C"/>
+          </svg>
+          Curieux·se
+        </button>
+
+        <!-- Bougie — Fatigué·e -->
+        <button class="emotion-btn" onclick="selectionner(this,'fatigue')">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+            <rect x="14.5" y="18" width="9" height="14" rx="1" stroke="#9B59B6" stroke-width="1.4" fill="rgba(155,89,182,0.1)"/>
+            <line x1="16.5" y1="18" x2="16.5" y2="16.5" stroke="#9B59B6" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="21.5" y1="18" x2="21.5" y2="16.5" stroke="#9B59B6" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M19 16c0 0-3-3.5-3-6 0-2 1.3-3 3-3s3 1 3 3c0 2.5-3 6-3 6z" fill="rgba(233,30,140,0.28)" stroke="#E91E8C" stroke-width="1.3"/>
+            <path d="M19 13c0 0-1.2-1.8-1.2-3" stroke="#E91E8C" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+            <line x1="11" y1="32" x2="27" y2="32" stroke="#00BCD4" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          Fatigué·e
+        </button>
+
+        <!-- Deux mains + cœur — Plein·e d'espoir -->
+        <button class="emotion-btn" onclick="selectionner(this,'espoir')">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+            <path d="M7 24c0-2.2 1.7-3.3 3.3-2.2l3.3 1.7V17a1.7 1.7 0 013.4 0v5.5" stroke="#9B59B6" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" fill="rgba(155,89,182,0.08)"/>
+            <path d="M31 24c0-2.2-1.7-3.3-3.3-2.2L24.4 23.5V17a1.7 1.7 0 00-3.4 0v5.5" stroke="#9B59B6" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" fill="rgba(155,89,182,0.08)"/>
+            <path d="M19 29c0 0-6-4-6-8a3.5 3.5 0 017 0 3.5 3.5 0 017 0c0 4-8 8-8 8z" fill="rgba(233,30,140,0.22)" stroke="#E91E8C" stroke-width="1.3"/>
+          </svg>
+          Plein·e d'espoir
+        </button>
+
+        <!-- Flamme-cœur — Impatient·e -->
+        <button class="emotion-btn" onclick="selectionner(this,'impatient')">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+            <path d="M19 33c0 0-12-8-12-16a8 8 0 0112-7 8 8 0 0112 7c0 8-12 16-12 16z" fill="rgba(233,30,140,0.13)" stroke="#E91E8C" stroke-width="1.4"/>
+            <path d="M19 27c0 0-6.5-4.5-6.5-9.5a4.5 4.5 0 019 0 4.5 4.5 0 019 0C30.5 22.5 19 27 19 27z" fill="rgba(233,30,140,0.28)" stroke="#E91E8C" stroke-width="1.15"/>
+            <path d="M19 22c0 0-3-2.2-3-5a3 3 0 016 0c0 2.8-3 5-3 5z" fill="rgba(155,89,182,0.45)" stroke="#9B59B6" stroke-width="1"/>
+            <line x1="25" y1="9" x2="28.5" y2="5.5" stroke="#E91E8C" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="27.5" y1="12.5" x2="31.5" y2="11.5" stroke="#9B59B6" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+          Impatient·e
+        </button>
+
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="moment">Un mot sur votre moment (optionnel)</label>
+      <input type="text" class="field-input" id="moment" placeholder="Une journée chargée, un souvenir qui revient…">
+    </div>
+
+    <button class="btn-generer" id="btnGenerer" onclick="genererMessage()">
+      <span>♡</span> Recevoir mon mot du soir
+    </button>
+  </div>
+
+  <!-- Carte résultat -->
+  <div class="carte-result" id="carteResult">
+    <div class="carte">
+      <div class="carte-header">
+        <div class="carte-prenom" id="rPrenom"></div>
+        <div class="carte-salut" id="rSalut"></div>
+      </div>
+      <div class="carte-body">
+        <div class="carte-message" id="rMessage"></div>
+        <div class="carte-conseil" id="rConseil"></div>
+        <div class="carte-signature">
+          <div class="signature-text">Avec tendresse, Lili</div>
+          <div class="signature-brand">Les Cœurs Solitaires<br>Grand Ouest · 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-action" onclick="copierTexte()">⎘ Copier le texte</button>
+      <button class="btn-action" onclick="partagerFacebook()">↗ Partager</button>
+    </div>
+    <button class="btn-nouvelle" onclick="reinitialiser()">← Créer une nouvelle carte</button>
+  </div>
+
+  <!-- CTA -->
+  <a class="cta-event" href="https://ypl.me/PWm" target="_blank">
+    <div class="cta-icon">🌹</div>
+    <div class="cta-text">
+      <div class="cta-label">Grand Rendez-Vous · Vannes</div>
+      <div class="cta-title">Le Grand Rendez-Vous des Cœurs Solitaires<br>Maison Flow · 6 juin 2026</div>
+      <div class="cta-slogan">La rencontre mérite mieux qu'un algorithme →</div>
+    </div>
+    <div class="cta-arrow">→</div>
+  </a>
+
+  <footer>
+    <span class="accent">♡</span> Un message de Lili Karantez · Les Cœurs Solitaires<br>
+    <span class="accent2">Oser. Rencontrer. Vivre.</span> — Grand Ouest · Bretagne &amp; Pays de la Loire
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let emotionChoisie = '';
+
+function selectionner(btn, emotion) {
+  document.querySelectorAll('.emotion-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  emotionChoisie = emotion;
+}
+
+async function genererMessage() {
+  const prenom = document.getElementById('prenom').value.trim();
+  if (!prenom) { afficherToast('Entrez votre prénom pour continuer ♡'); return; }
+  if (!emotionChoisie) { afficherToast('Choisissez une émotion du soir ♡'); return; }
+
+  const ville = document.getElementById('ville').value.trim();
+  const moment = document.getElementById('moment').value.trim();
+  const btn = document.getElementById('btnGenerer');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+
+  const emotionsMap = {
+    solitaire: 'solitaire',
+    nostalgique: 'nostalgique',
+    curieux: 'curieux·se',
+    fatigue: 'fatigué·e',
+    espoir: "plein·e d'espoir",
+    impatient: 'impatient·e'
+  };
+
+  const prompt = `Tu es Lili Karantez, créatrice des "Cœurs Solitaires" et du "Grand Rendez-Vous des Cœurs Solitaires" (Vannes, Maison Flow, 6 juin 2026). Tu organises des soirées de rencontres authentiques pour célibataires du Grand Ouest. Ta voix : chaude, poétique, cinématique, profondément humaine. Tu parles en "vous", tu utilises des métaphores de nature, de lumière, du Golfe du Morbihan. Tu termines sur une note d'espoir et de possibilité de vraie rencontre.
+
+Tes slogans : "La rencontre mérite mieux qu'un algorithme", "Parce que l'amour ça se vit, pas juste ça se scrolle", "Oser. Rencontrer. Vivre.", "Et si votre prochaine belle histoire commençait ici ?"
+
+Personne qui te consulte :
+- Prénom : ${prenom}
+- Ville : ${ville || 'non précisée'}
+- Émotion : ${emotionsMap[emotionChoisie] || emotionChoisie}
+${moment ? `- Ce qu'elle vit : ${moment}` : ''}
+
+Écris une carte-message intime, poétique, ancrée dans l'univers de la rencontre amoureuse authentique. UNIQUEMENT du JSON valide, sans texte avant ou après :
+
+{
+  "salut": "Phrase d'accroche poétique max 12 mots, nomme l'émotion avec beauté, ouvre vers la possibilité d'aimer",
+  "message": "3 à 4 phrases directes, chaudes, profondes. Parle de son émotion en lien avec la capacité d'aimer et d'être aimé·e. Zéro cliché. Sois vraie et cinématique.",
+  "conseil": "2 à 3 phrases : une action douce ce soir, une pensée, et une ouverture naturelle vers la vraie rencontre humaine."
+}`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await response.json();
+    const raw = data.content.map(b => b.text || '').join('');
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const contenu = JSON.parse(clean);
+
+    document.getElementById('rPrenom').textContent = prenom + (ville ? ' · ' + ville : '');
+    document.getElementById('rSalut').textContent = contenu.salut;
+    document.getElementById('rMessage').textContent = contenu.message;
+    document.getElementById('rConseil').textContent = contenu.conseil;
+
+  } catch(err) {
+    document.getElementById('rPrenom').textContent = prenom + (ville ? ' · ' + ville : '');
+    document.getElementById('rSalut').textContent = "Ce soir, quelque chose de beau est encore possible.";
+    document.getElementById('rMessage').textContent = "Peu importe où vous en êtes ce soir, il y a quelque chose de courageux dans le fait de continuer à croire que la rencontre est possible. Ce courage mérite d'être reconnu.";
+    document.getElementById('rConseil').textContent = "Soyez doux·ce avec vous-même. Vous êtes exactement là où vous devez être — en train de devenir la personne que quelqu'un attend de rencontrer.";
+  }
+
+  document.getElementById('formCard').style.display = 'none';
+  document.getElementById('carteResult').classList.add('visible');
+  btn.disabled = false;
+  btn.innerHTML = '<span>♡</span> Recevoir mon mot du soir';
+}
+
+function copierTexte() {
+  const prenom = document.getElementById('rPrenom').textContent;
+  const salut = document.getElementById('rSalut').textContent;
+  const msg = document.getElementById('rMessage').textContent;
+  const conseil = document.getElementById('rConseil').textContent;
+  const texte = `${prenom}\n\n"${salut}"\n\n${msg}\n\n${conseil}\n\n— Lili Karantez · Les Cœurs Solitaires\nOser. Rencontrer. Vivre.`;
+  navigator.clipboard.writeText(texte)
+    .then(() => afficherToast('Texte copié — prêt à partager ♡'))
+    .catch(() => afficherToast('Sélectionnez et copiez manuellement'));
+}
+
+function partagerFacebook() {
+  afficherToast("Copiez d'abord le texte, puis partagez-le ♡");
+}
+
+function reinitialiser() {
+  document.getElementById('formCard').style.display = 'block';
+  document.getElementById('carteResult').classList.remove('visible');
+  ['prenom','ville','moment'].forEach(id => document.getElementById(id).value = '');
+  document.querySelectorAll('.emotion-btn').forEach(b => b.classList.remove('selected'));
+  emotionChoisie = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function afficherToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+</script>
+</body>
+</html>
